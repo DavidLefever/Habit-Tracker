@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Habit Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <h1>Habit Tracker <span class="muted small" id="today"></span></h1>
+
+    <div class="card">
+      <div class="row">
+        <input id="habitName" type="text" placeholder="Habit name (e.g., Lights out by 11pm)" style="flex:1" />
+        <input id="habitGoal" type="number" min="1" max="365" placeholder="Goal days (optional)" style="width:160px" />
+        <select id="habitFreq" class="pill select">
+          <option value="daily" selected>Daily</option>
+          <option value="mwf">Mon / Wed / Fri</option>
+          <option value="tuth">Tue / Thu</option>
+          <option value="weekly">Weekly target…</option>
+        </select>
+        <span id="weeklyConfig" class="row" style="gap:6px; align-items:center; display:none">
+          <label for="weeklyTarget" class="muted small">Target/week:</label>
+          <input id="weeklyTarget" type="number" min="1" max="7" value="3" class="pill" style="width:110px" />
+        </span>
+        <button id="addBtn">Add Habit</button>
+      </div>
+      <p class="muted small" style="margin-top:8px">
+        Click <b>Did it today</b> once per calendar day. Streak counts consecutive days up to today. Data is saved in your browser.
+      </p>
+    </div>
+
+    <!-- Theme picker -->
+    <div class="theme-row">
+      <button id="themeBtn" class="pill">Theme</button>
+      <div id="themePanel" class="theme-panel" hidden>
+        <div class="swatches">
+          <button class="swatch" data-theme="1" aria-label="Blue to Green"></button>
+          <button class="swatch" data-theme="2" aria-label="Pink to Orange"></button>
+          <button class="swatch" data-theme="3" aria-label="Red to Yellow"></button>
+          <button class="swatch" data-theme="4" aria-label="Teal to Indigo"></button>
+          <button class="swatch" data-theme="5" aria-label="Aqua to Purple"></button>
+          <button class="swatch" data-theme="6" aria-label="Mint to Light Yellow"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toolbar: sort, filter, rollover, undo -->
+    <div class="toolbar card">
+      <div class="row">
+        <label for="sortSelect" class="muted small" style="align-self:center">Sort:&nbsp;</label>
+        <select id="sortSelect" class="pill select">
+          <option value="streak">Streak (desc)</option>
+          <option value="best">Best streak</option>
+          <option value="progress">Goal progress</option>
+          <option value="recent">Recently added</option>
+          <option value="overdue">Overdue first</option>
+          <option value="name">Name A→Z</option>
+        </select>
+
+        <label for="filterSelect" class="muted small" style="align-self:center">&nbsp;&nbsp;Filter:&nbsp;</label>
+        <select id="filterSelect" class="pill select">
+          <option value="all">All</option>
+          <option value="open">Open (not done today)</option>
+          <option value="doneToday">Done today</option>
+        </select>
+
+        <label for="rolloverSelect" class="muted small" style="align-self:center">&nbsp;&nbsp;Day ends at:&nbsp;</label>
+        <select id="rolloverSelect" class="pill select">
+          <option value="0">12:00 AM</option>
+          <option value="1">1:00 AM</option>
+          <option value="2">2:00 AM</option>
+          <option value="3">3:00 AM</option>
+          <option value="4" selected>4:00 AM</option>
+          <option value="5">5:00 AM</option>
+          <option value="6">6:00 AM</option>
+        </select>
+
+        <button id="undoBtn" class="pill" style="margin-left:auto" hidden>Undo</button>
+      </div>
+    </div>
+
+    <div id="habits" class="habits"></div>
+  </div>
+
+  <div id="toastWrap" class="toast-wrap" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

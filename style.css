@@ -1,0 +1,127 @@
+:root{
+  --bg:#0b0e14; --card:#0e1118; --text:#e6e9ef; --muted:#9aa4b2;
+  /* live gradient colors (set by JS from theme presets) */
+  --accent:#34a0ff; --ok:#2bd56f;
+  /* theme presets */
+  --theme1-start:#34a0ff; --theme1-end:#2bd56f;
+  --theme2-start:#ff7ab6; --theme2-end:#ff9a55;
+  --theme3-start:#ff5858; --theme3-end:#ffd057;
+  --theme4-start:#00c2a8; --theme4-end:#4b6cff;
+  --theme5-start:#00e1ff; --theme5-end:#a66bff;
+  --theme6-start:#7fffd6; --theme6-end:#fff38a;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif}
+.wrap{max-width:920px;margin:28px auto;padding:0 16px}
+
+h1{margin:0 0 16px 0;font-size:28px}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+
+.card{background:var(--card);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;margin:12px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+
+input,button,select{font:inherit}
+input[type="text"],input[type="number"],select{background:#0e1118;border:1px solid rgba(255,255,255,.15);color:var(--text);padding:8px 10px;border-radius:10px}
+button{cursor:pointer}
+.pill{background:#191e28;border:1px solid rgba(255,255,255,.15);color:var(--text);padding:8px 12px;border-radius:999px}
+.pill:focus{outline:2px solid rgba(255,255,255,.15)}
+.pill.danger{border-color:rgba(255,99,99,.4);color:#ffdede}
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background:#0e1118;
+  border:1px solid rgba(255,255,255,.15);
+  color:var(--text);
+  padding:6px 22px 6px 8px; /* compact height, arrow closer but not oversized */
+  border-radius:8px;
+  font-size:14px;
+
+  /* custom arrow, moderate size */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white'><polygon points='0,0 12,0 6,7'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 6px center; /* arrow closer to text */
+  background-size: 12px;
+}
+.goal-input{width:140px; margin-right:8px}
+
+/* Theme picker */
+.theme-row{position:relative;margin:8px 0}
+.theme-panel{position:absolute;z-index:20;top:44px;left:0;background:var(--card);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.swatches{display:grid;grid-template-columns:repeat(6,36px);gap:10px}
+.swatch{width:36px;height:24px;border-radius:8px;border:1px solid rgba(255,255,255,.25)}
+.swatch[data-theme="1"]{background:linear-gradient(90deg,var(--theme1-start),var(--theme1-end))}
+.swatch[data-theme="2"]{background:linear-gradient(90deg,var(--theme2-start),var(--theme2-end))}
+.swatch[data-theme="3"]{background:linear-gradient(90deg,var(--theme3-start),var(--theme3-end))}
+.swatch[data-theme="4"]{background:linear-gradient(90deg,var(--theme4-start),var(--theme4-end))}
+.swatch[data-theme="5"]{background:linear-gradient(90deg,var(--theme5-start),var(--theme5-end))}
+.swatch[data-theme="6"]{background:linear-gradient(90deg,var(--theme6-start),var(--theme6-end))}
+.swatch:focus{outline:2px solid rgba(255,255,255,.35)}
+
+/* Toolbar */
+.toolbar .row{align-items:center}
+
+/* Habits grid */
+.habits{display:grid;gap:12px}
+@media (min-width:720px){.habits{grid-template-columns:1fr}}
+
+.habit-card{background:var(--card);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px}
+.habit-top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.habit-name{font-weight:700;font-size:18px;margin-bottom:2px}
+.badge{display:inline-flex;align-items:center;gap:4px;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:4px 8px;font-size:12px;margin-right:6px;margin-top:4px}
+
+.cols{display:grid;grid-template-columns:1fr auto auto;gap:12px;margin-top:10px;align-items:center}
+@media (max-width:640px){.cols{grid-template-columns:1fr;}}
+
+/* Progress */
+.progress{position:relative;height:8px;background:#0e1118;border:1px solid rgba(255,255,255,.12);border-radius:999px;overflow:hidden}
+.bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--ok));transition:width .25s ease}
+.small.muted + .progress{margin-top:6px}
+
+/* Celebration pulse on container so glow isn't clipped */
+.progress.celebrate{overflow:visible}
+.progress.celebrate::after{content:"";position:absolute;inset:-6px;border-radius:999px;box-shadow:0 0 0 0 rgba(126,217,87,0.6);animation:pulseGlow 1.4s ease-out 1;pointer-events:none}
+@keyframes pulseGlow{0%{box-shadow:0 0 0 0 rgba(126,217,87,0.6)}100%{box-shadow:0 0 0 18px rgba(126,217,87,0)}}
+
+/* Success/Info badges */
+
+.badge.success{color:#d6ffd6;border-color:rgba(126,217,87,.6);background:rgba(126,217,87,.12)}
+.badge.info{color:#d6f1ff;border-color:rgba(122,162,255,.6);background:rgba(122,162,255,.12)}
+
+/* Active streak glow */
+.badge.streak-active {
+  color: #fff3e0;
+  border-color: rgba(255,140,0,.8);
+  background: rgba(255,140,0,.2);
+  box-shadow: 0 0 8px 2px rgba(255,140,0,.6);
+  animation: streakPulse 1.5s infinite alternate;
+}
+@keyframes streakPulse {
+  from { box-shadow: 0 0 6px 2px rgba(255,140,0,.5); }
+  to { box-shadow: 0 0 14px 4px rgba(255,69,0,.9); }
+}
+
+/* Toasts */
+.toast-wrap{position:fixed;right:16px;bottom:16px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--card);color:var(--text);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:10px 12px;box-shadow:0 6px 24px rgba(0,0,0,.35);opacity:0;transform:translateY(8px);transition:opacity .25s ease,transform .25s ease}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast .title{font-weight:800;margin-right:6px}
+
+/* --- Collapsible cards --- */
+.habit-card.collapsed .cols{ display:none; }
+.habit-card.collapsed .badges{ display:none; }
+.collapse-btn{
+  width:32px;
+  height:32px;
+  padding:0;
+  font-size:20px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Button spacing in card header actions */
+.actions .pill + .pill{ margin-left:8px }
